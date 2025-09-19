@@ -24,9 +24,15 @@ library(RColorBrewer)
 library(shinyjs)
 library(ggvenn)
 library(DT)
+library(dqshiny)
 
 urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/byStateYear.csv"
 byStateYear <- read_csv(url(urlfile))
+
+urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/stateList.csv"
+stateSimList <- read_csv(url(urlfile))
+
+opts = unique(stateSimList$species)
 
  fluidPage(
    useShinyjs(),
@@ -194,6 +200,13 @@ and share observations of species.   </a>"),
                     choices = unique(byStateYear$stateProvince)
         ),
         dataTableOutput("table_two_state_story"),
+        height = 750
+      ),
+      card( 
+        card_header("Where else can you find your new favorite species?"),
+        
+        autocomplete_input("auto1", "Species:", opts),
+        leafletOutput("chosenSpecMap"),
         height = 750
       ),
       card(

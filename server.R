@@ -608,5 +608,39 @@ function(data, latlng) {
     two_state_sim_story()
   }))
   
+  # From http://leafletjs.com/examples/choropleth/us-states.js
+  states <- geojsonio::geojson_read("https://rstudio.github.io/leaflet/json/us-states.geojson", what = "sp")
+  
+  this_species <- reactive({
+    byState <- stateSimList %>% filter(species == input$auto1)
+    toP <- sp::merge(states, byState, by.x = "name", by.y = "stateProvince", all.x=T)
+    toP
+  })
+  
+  
+  
+  
+  output$chosenSpecMap <- renderLeaflet({
+    leaflet(this_species()) %>%
+      setView(-96, 37.8, 4) %>%
+      addTiles() %>%
+      addPolygons(
+        fillColor = ~ species,
+        weight = 2,
+        opacity = 1,
+        color = "white",
+        dashArray = "3",
+        fillOpacity = 0.7,
+        highlightOptions = highlightOptions(
+          weight = 5,
+          color = "#666",
+          dashArray = "",
+          fillOpacity = 0.7,
+          bringToFront = TRUE
+        )
+      )
+    
+  })
+  
 }
 
