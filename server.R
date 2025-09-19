@@ -78,6 +78,15 @@ function(input, output, session) {
     }
   )
   
+  output$downloadText_inat <- downloadHandler(
+    filename = function() {
+      paste("draft-iNat-", gsub(" ", "_", Sys.time()), ".txt", sep = "")
+    },
+    content = function(con) {
+      writeLines(input$text_inat, con)
+    }
+  )
+  
 #### roadless ####
   
   output$map1 <- renderLeaflet({getLocation(1)})
@@ -500,6 +509,104 @@ function(data, latlng) {
       distinct()
   })
   
+  #### hometown hero ####
+  
+  urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/spec-story.csv"
+  storydata = read_csv(url(urlfile))
+  
+  stateHome = reactive({
+    this = input$stateHome
+    this})
+  
+  
+  
+  hhd = reactive({
+    storydata %>% filter(state %in% stateHome())
+  })
+  
+  
+  output$hometown_hero<- renderText({paste0("Your hometown hero (the species reported most) is: ", as.character(hhd()$hometown_hero[1]), ".")} )
+  
+  observeEvent(input$stateHome,{
+    output$url_h <-renderUI(a(href=paste0(hhd()$urlH[1]),"Click here for a picture and more information about the species."))
+  })
+  
+  output$underdog <- renderText({paste0("Your hometown underdog (the species reported least) is: ", as.character(hhd()$underdog[1]), ".")} )
+  
+  observeEvent(input$stateHome,{
+    output$url_u <-renderUI(a(href=paste0(hhd()$urlU[1]),"Click here for a picture and more information about the species."))
+  })
+  
+  urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/hometown-hero.csv"
+  
+  hometown_hero_data <- read_csv(url(urlfile))
+  
+  urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/underdog.csv"
+  
+  underdog_data <- read_csv(url(urlfile))
+  
+  hhd_p = reactive({
+    hometown_hero_data %>% filter(stateProvince %in% stateHome())
+  })
+  
+  ud_p = reactive({
+    underdog_data %>% filter(stateProvince %in% stateHome())
+  })
+  
+  output$plotHH<-renderPlot({
+    agg <- hhd_p() %>% group_by(year, month) %>% summarise(count = n())  %>% mutate(dateP = as.Date( paste(year, "-", str_pad(width = 2, side = "left",pad = "0",string = month), "-", "01", sep = "")))
+    
+    
+    ggplot(agg,aes(x=dateP,y=count))+geom_point() + geom_line() + xlab("date") + ylab("count of observations in this state") + theme_minimal(base_size = 15)
+    
+  })
+  
+  output$plotUD<-renderPlot({
+    agg <- ud_p() %>% group_by(year, month) %>% summarise(count = n())  %>% mutate(dateP = as.Date( paste(year, "-", str_pad(width = 2, side = "left",pad = "0",string = month), "-", "01", sep = "")))
+    
+    
+    ggplot(agg,aes(x=dateP,y=count))+geom_point() + geom_line() + xlab("date") + ylab("count of observations in this state") + theme_minimal(base_size = 15)
+    
+  })
+  
+  urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/stateList.csv"
+  stateSimList <- read_csv(url(urlfile))
+  
+  
+  two_state_sim_story <- reactive({
+    
+    
+    data1 <- stateSimList %>% filter(stateProvince == input$stateHome)
+    data2 <- stateSimList %>% filter(stateProvince == input$stateMeaning)
+    
+    
+    both <- intersect(data1$species, data2$species)
+    justone <- setdiff(data1$species, data2$species)
+    justtwo <- setdiff(data2$species, data1$species)
+    
+    nb <- ifelse(length(both) < 10, length(both), 10)
+    njo <- ifelse(length(justone) < 10, length(justone), 10)
+    njt <- ifelse(length(justtwo) < 10, length(justtwo), 10)
+    
+    data <- cbind.data.frame(species = c(
+      both[sample(1:length(both), nb)],
+      justone[sample(1:length(justone), njo)],
+      justtwo[sample(1:length(justtwo), njt)]
+    ))
+    
+    url1 = data1$url_val[which(data1$species %in% data)]
+    
+    url3 = data2$url_val[which(data2$species %in% justtwo)]
+    
+    data$info <- c(rep("in_both", nb), rep("in_first_only", njo), rep("in_second_only", njt))
+    #data$url <- c(url1,  url3)
+    
+    data
+  })
+  
+  output$table_two_state_story <- renderDataTable(DT::datatable({
+    two_state_sim_story()
+  }))
   
 }
 

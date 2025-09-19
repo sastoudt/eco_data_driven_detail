@@ -25,6 +25,9 @@ library(shinyjs)
 library(ggvenn)
 library(DT)
 
+urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/byStateYear.csv"
+byStateYear <- read_csv(url(urlfile))
+
  fluidPage(
    useShinyjs(),
   ##theme selector that you can you too see all the options ##
@@ -92,6 +95,8 @@ library(DT)
       card(
         card_header("What am I looking at?"),
         p("Below is an interactive Google Map with a circle of radius one mile drawn around your random location."),
+        HTML("<a href='https://www.amstat.org/asa/files/pdfs/stew/PercentWithinMileofRoad.pdf'> This uses an approach from an statistics education activity.  </a>"),
+        
       ),
       
       card( 
@@ -157,6 +162,60 @@ library(DT)
                     )
         )),
     ),
+    
+    nav_panel(
+      "iNaturalist Hometown Heroes, Underdogs, and Location Comparisons",
+      card(
+        card_header("What am I looking at?"),
+        HTML("<a href='https://doi.org/10.15468/dl.xh4sme'> This data was collected between 2010 and 2023 and comes from the Global Biodiversity Information Facility.</a>"),
+        HTML("<a href='https://www.inaturalist.org/'> The particular source that is displayed here comes from iNaturalist, an app and website that allows people all over the world to identify
+and share observations of species.   </a>"),
+
+        
+         ),
+      
+      card( 
+        card_header("Where do you call home?"),
+        selectInput("stateHome", "Choose a state:",
+                    choices = unique(byStateYear$stateProvince)
+        ),
+        textOutput("hometown_hero"),
+        uiOutput("url_h"),
+        #plotOutput("plotHH"),
+        textOutput("underdog"),
+        uiOutput("url_u")#,
+        #plotOutput("plotUD"),
+        #height = 750
+      ),
+      card( 
+        card_header("Where is another place that holds meaning for you?"),
+        p("These are some example species that appear in both states that you chose, or in one but not the other."),
+        selectInput("stateMeaning", "Choose a state:",
+                    choices = unique(byStateYear$stateProvince)
+        ),
+        dataTableOutput("table_two_state_story"),
+        height = 750
+      ),
+      card(
+        ##ADDING TABS TO TEXT BOX AND PROMPTS ##
+        
+        navset_card_pill(
+          nav_panel("Time to Write!", 
+                    textAreaInput("text_inat", "", "", height = "200px", width = "1500px"),
+                    p("When you are done, feel free to download your ideas so you have them for future reference."),
+                    downloadButton("downloadText_inat", "Download Notes")),
+          nav_panel("Prompts to Consider", 
+         p("")),
+          nav_panel("From the Dodge Archive",
+p(""),
+          )
+        )),
+    ),
+    
+    
+    
+    
+    
     nav_panel(
       "National Parks: At a Glance",
       card(
