@@ -642,5 +642,176 @@ function(data, latlng) {
     
   })
   
+  
+  #### species richness ####
+  states <- geojsonio::geojson_read("https://rstudio.github.io/leaflet/json/us-states.geojson", what = "sp")
+  
+  # https://www.reddit.com/r/rstats/comments/fs1d08/how_to_deploy_a_shinyio_app_that_pulls_from_a/
+  ## eventually switch when deployed
+  ## urlfile="https://raw.githubusercontent.com/lrjoshi/webpage/master/public/post/c159s.csv"
+  ## mydata<-read_csv(url(urlfile))
+  urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/byState.csv"
+  byState <- read_csv(url(urlfile))
+  
+  toP <- sp::merge(states, byState, by.x = "name", by.y = "stateProvince")
+  
+  test <- quantile(byState$specRichness, seq(0, 1, length.out = 8))
+  
+  bins <- unname(test)
+  pal <- colorBin("Greens", domain = toP$specRichness, bins = bins)
+  
+  labels <- sprintf(
+    "<strong>%s</strong><br/>%g unique species reported",
+    toP$name, toP$specRichness
+  ) %>% lapply(htmltools::HTML)
+  
+  output$mapSR <- renderLeaflet({
+    leaflet(toP) %>%
+      setView(-96, 37.8, 4) %>%
+      addTiles() %>%
+      addPolygons(
+        fillColor = ~ pal(specRichness),
+        weight = 2,
+        opacity = 1,
+        color = "white",
+        dashArray = "3",
+        fillOpacity = 0.7,
+        highlightOptions = highlightOptions(
+          weight = 5,
+          color = "#666",
+          dashArray = "",
+          fillOpacity = 0.7,
+          bringToFront = TRUE
+        ),
+        label = labels,
+        labelOptions = labelOptions(
+          style = list("font-weight" = "normal", padding = "3px 8px"),
+          textsize = "15px",
+          direction = "auto"
+        )
+      ) %>%
+      addLegend(
+        pal = pal, values = ~specRichness, opacity = 0.7, title = NULL,
+        position = "bottomright"
+      )
+  })
+  
+  urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/byStateSeason.csv"
+  byStateSeason <- read_csv(url(urlfile))
+  
+  
+  
+  datasetInputS1 <- reactive({
+    byStateSeasonF <- byStateSeason %>% filter(season == input$season)
+    byStateSeasonF
+  })
+  
+  
+  #test <- quantile(byStateSeason$specRichness, seq(0, 1, length.out = 8))
+  
+  
+  output$mapSeasonSR <- renderLeaflet({
+    toP <- sp::merge(states, datasetInputS1(), by.x = "name", by.y = "stateProvince")
+    
+    test <- quantile(datasetInputS1()$specRichness, seq(0, 1, length.out = 8))
+    
+    
+    bins <- unname(test)
+    bins <- unique(bins)
+    pal <- colorBin("Greens", domain = toP$specRichness, bins = bins)
+    
+    labels <- sprintf(
+      "<strong>%s</strong><br/>%g unique species reported",
+      toP$name, toP$specRichness
+    ) %>% lapply(htmltools::HTML)
+    leaflet(toP) %>%
+      setView(-96, 37.8, 4) %>%
+      addTiles() %>%
+      addPolygons(
+        fillColor = ~ pal(specRichness),
+        weight = 2,
+        opacity = 1,
+        color = "white",
+        dashArray = "3",
+        fillOpacity = 0.7,
+        highlightOptions = highlightOptions(
+          weight = 5,
+          color = "#666",
+          dashArray = "",
+          fillOpacity = 0.7,
+          bringToFront = TRUE
+        ),
+        label = labels,
+        labelOptions = labelOptions(
+          style = list("font-weight" = "normal", padding = "3px 8px"),
+          textsize = "15px",
+          direction = "auto"
+        )
+      ) %>%
+      addLegend(
+        pal = pal, values = ~specRichness, opacity = 0.7, title = NULL,
+        position = "bottomright"
+      )
+  })
+  
+  urlfile <- "https://raw.githubusercontent.com/sastoudt/dodge_data/main/ecology-data/byStateYear.csv"
+  byStateYear <- read_csv(url(urlfile))
+  
+  
+  #test <- quantile(byStateYear$specRichness, seq(0, 1, length.out = 8))
+  
+  datasetInputY <- reactive({
+    byStateYearF <- byStateYear %>% filter(year == input$year)
+    byStateYearF
+  })
+  
+  
+  
+  
+  output$mapYearSR <- renderLeaflet({
+    toP <- sp::merge(states, datasetInputY(), by.x = "name", by.y = "stateProvince")
+    
+    test <- quantile(datasetInputY()$specRichness, seq(0, 1, length.out = 8))
+    
+    
+    bins <- unname(test)
+    pal <- colorBin("Greens", domain = toP$specRichness, bins = bins)
+    
+    labels <- sprintf(
+      "<strong>%s</strong><br/>%g unique species reported",
+      toP$name, toP$specRichness
+    ) %>% lapply(htmltools::HTML)
+    leaflet(toP) %>%
+      setView(-96, 37.8, 4) %>%
+      addTiles() %>%
+      addPolygons(
+        fillColor = ~ pal(specRichness),
+        weight = 2,
+        opacity = 1,
+        color = "white",
+        dashArray = "3",
+        fillOpacity = 0.7,
+        highlightOptions = highlightOptions(
+          weight = 5,
+          color = "#666",
+          dashArray = "",
+          fillOpacity = 0.7,
+          bringToFront = TRUE
+        ),
+        label = labels,
+        labelOptions = labelOptions(
+          style = list("font-weight" = "normal", padding = "3px 8px"),
+          textsize = "15px",
+          direction = "auto"
+        )
+      ) %>%
+      addLegend(
+        pal = pal, values = ~specRichness, opacity = 0.7, title = NULL,
+        position = "bottomright"
+      )
+  })
+  
+  
+  
 }
 
