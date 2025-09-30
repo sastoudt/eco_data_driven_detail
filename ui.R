@@ -220,9 +220,11 @@ and share observations of species.   </a>"),
                     p("When you are done, feel free to download your ideas so you have them for future reference."),
                     downloadButton("downloadText_inat", "Download Notes")),
           nav_panel("Prompts to Consider", 
-         p("")),
+                    HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSdd_SzQmx1KntGJcTP_Lrif2BzM5zj8nt-6zifEQVD65fCmig/viewform?usp=header'> Submit a prompt!  </a>")
+          ),
           nav_panel("From the Dodge Archive",
-p(""),
+                    HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeIPtgVfMwP0oT6iMj6dptRA5o9_9r99o43uHR5MXgbxcz-PA/viewform?usp=header'> Does this remind you of a past Dodge piece? Recommend it here.  </a>")
+                    ,
           )
         )),
     ),
