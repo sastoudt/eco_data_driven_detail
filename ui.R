@@ -51,13 +51,19 @@ opts = unique(stateSimList$species)
     #tabPanel(
     nav_panel(
       "Who are we, and what is this?",
+      
+      h2(HTML("<a href='https://www.thedodgemag.com/'> The Dodge </a>"), ": an eco-writing literary magazine"),
       card(
-        card_header("Our Goal"),
+        card_header("The Dodge's Goals"),
+        p("We want to help inspire a wide range of writers and readers to engage with the Dodge. "),
+         ),
+      card(
+        card_header("App Developers' Goals"),
         p("We are a small team from Bucknell University (Elinam Agbo, Shaheryar Asghar, Caitlyn Hickey, and Sara Stoudt) sponsored by the Dominguez Center for Data Science,
           who have partnered with The Dodge to combine our two passions: Data Science and Nature. We have been developing different apps, like this one, to inspire creative writing based on real-world data!"),
         br(" Our team encourages you to explore the data yourself and try to find a story hidden between the data points. We hope to see your stories come to life.")
       ),
-      
+       h2("Find the data-driven detail in a variety of of environmental data sources..."),
       card(
         #card_header("Our Inspiration"),
         navset_card_pill( 
@@ -69,14 +75,14 @@ opts = unique(stateSimList$species)
         )),
       
       #MAKING TABS FOR EACH OF OUR INSPIRATIONS# 
-      
+      h2("Behind the scenes with the developer team..."),
       card(
         #card_header("Our Inspiration"),
         navset_card_pill( 
           nav_panel("Caitlyn", "I was inspired to find data on sharks after seeing a shark-tracking bracelet my sister bought. With the purchase of a bracelet, she was given access to the location of a shark through an app. We watched the shark swim along the East Coast and contrived stories about what it was doing. In our minds, the shark was on a food tour trying to find the tastiest surfers."), 
           nav_panel("Shaheryar", "I’ve always been drawn to the hidden life within national parks—the species that quietly shape each ecosystem. What began as a simple question about how many species live in a single park grew into a deeper curiosity about biodiversity patterns across regions. That’s what led me to build an app: a platform to visualize species data and help people engage with the ecological richness of national parks in a way that’s interactive, informed, and accessible."), 
           nav_panel("Sara", "I had been working with The Dodge, an online literary magazine focusing on eco-writing, to try to develop an interactive web app that helps make exploring different nature-related datasets more accessible with the idea that something in the data might be generative, sparking some ideas about something to write about. Ideally, we would have a few different datasets paired with some writing prompts to get people started and then we would either run some kind of contest to get new people writing for the Dodge or have the app go out in a newsletter/on social media to just give people a way into the writing if they are facing the blank page. I was hitting a wall with my own progress and thought I could use some fresh eyes and some help, so I pitched this project idea to the Dominguez Center for Data Science."),
-          nav_panel("What we have read", p("Throughout developing this app, we took inspiration from pieces published in The Dodge. Here is a list of what we read:"),
+          nav_panel("What we have read in the Dodge", p("Throughout developing this app, we took inspiration from pieces published in The Dodge. Here is a list of what we read:"),
           HTML("<a href='https://www.thedodgemag.com/christopherlinforth1'>Homesick by Christopher Linforth</a>"),
           HTML("<a href='https://www.thedodgemag.com/piyalimukherjee1'>Death is a Name Spelled in Stripes by Piyali Mukherjee </a>"),
           HTML("<a href='https://www.thedodgemag.com/violetagarciamendoza1'>Deathbed Phenomena and Incomplete Abecedarian at the End of the Once World by Victoria Garcia-Mendoza </a>"),
