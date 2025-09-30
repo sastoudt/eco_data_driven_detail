@@ -125,7 +125,9 @@ opts = unique(stateSimList$species)
                     p("How often does a randomly generated point end up in your state? Does this surprise you? Why or why not?"),
                     p("Write from the point of view of someone who lives at this spot, who is a visitor to this spot, or to someone just passing through this spot. What brings them there? What do they see?"),
                     p("Write from the point of view of the location itself. How has it experienced time? Who has come and gone? How does it relate to its neighbors in space? Does it fit in?")
-          )
+          ),
+          nav_panel("From the Dodge Archive",),
+          
         )),
     ),
     nav_panel(
@@ -319,35 +321,35 @@ nav_panel(
           layout_sidebar(
             fillable = TRUE,
             sidebar = sidebar(
-            p("Need some accountability? Use this timer for brainstorming above."),
+            p("Need some accountability? Use this timer for brainstorming."),
                          actionButton("start", "Start"),
                          actionButton("stop", "Stop"),
                          actionButton("reset", "Reset"),
                          numericInput("seconds", "Seconds:", value = 300, min = 0, max = 99999, step = 1),
                          textOutput("timeleft")),
-          textAreaInput("text5", "", "", height = "500px", width = "100%"),
-          p("When you are done, feel free to download your ideas so you have them for future reference."),
-          downloadButton("downloadText5", "Download Notes"))
+          #textAreaInput("text5", "", "", height = "500px", width = "100%"),
+          #p("When you are done, feel free to download your ideas so you have them for future reference."),
+          #downloadButton("downloadText5", "Download Notes"))
         )
-      ),
+      )),
       card(
-        card_header("If you get stuck, use these questions to explore biodiversity insights:"),
-        tags$ul(
-          tags$li("🌿 Species Diversity: Which parks are biodiversity hotspots? What might explain these patterns?"),
-          tags$li("🦉 The Mystery of Rare Species: Are certain species naturally rare or impacted by human activity?"),
-          tags$li("🏕️ Tourism vs. Biodiversity: How do highly visited parks compare to less visited ones?"),
-          tags$li("🌍 Climate Change and Species Resilience: Are species distributions shifting over time?")
-        )
-      ), 
-      card(
-        card_header("Want more specific writing prompts?"),
-        tags$ul(
-          tags$li("The Forgotten Ones: Choose an overlooked species category like fungi, chromista, or protozoa. Write a poetic ode or speculative fiction where these organisms shape the future of the park’s ecosystem."),
-          tags$li("A Secret Between: Pick two vastly different species categories (e.g. spider/scorpion and fish). Invent a tale of quiet communication between them—a warning system, a secret alliance."),
-          tags$li("Missingness: Write a creative nonfiction or investigative speculative essay that interrogates absence in this data. Is a missing species a missing data entry, an oversight in the system, or a deeper commentary on what types of life we value and record?"),
-          tags$li("Being Counted: Use the absence of species to explore what it means to not be counted. Reflect on what disappears when documentation fails—and who is left unseen.")
-        )
-      ),
+        ##ADDING TABS TO TEXT BOX AND PROMPTS ##
+        
+        navset_card_pill(
+          nav_panel("Time to Write!", 
+                    textAreaInput("text5", "", "", height = "200px", width = "1500px"),
+                    p("When you are done, feel free to download your ideas so you have them for future reference."),
+                    downloadButton("downloadText5", "Download Notes")),
+          nav_panel("Prompts to Consider", 
+                    p("The Forgotten Ones: Choose an overlooked species category like fungi, chromista, or protozoa. Write a poetic ode or speculative fiction where these organisms shape the future of the park’s ecosystem."),
+                    p("A Secret Between: Pick two vastly different species categories (e.g. spider/scorpion and fish). Invent a tale of quiet communication between them—a warning system, a secret alliance."),
+                    p("Missingness: Write a creative nonfiction or investigative speculative essay that interrogates absence in this data. Is a missing species a missing data entry, an oversight in the system, or a deeper commentary on what types of life we value and record?"),
+                    p("Being Counted: Use the absence of species to explore what it means to not be counted. Reflect on what disappears when documentation fails—and who is left unseen."),),
+          nav_panel("From the Dodge Archive",
+                    p(""),
+          )
+        )), 
+     
     ),
     
     nav_panel("National Parks: A Deeper Dive",
