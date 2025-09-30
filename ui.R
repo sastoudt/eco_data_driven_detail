@@ -126,7 +126,8 @@ opts = unique(stateSimList$species)
                     p("Write from the point of view of someone who lives at this spot, who is a visitor to this spot, or to someone just passing through this spot. What brings them there? What do they see?"),
                     p("Write from the point of view of the location itself. How has it experienced time? Who has come and gone? How does it relate to its neighbors in space? Does it fit in?")
           ),
-          nav_panel("From the Dodge Archive",),
+          nav_panel("From the Dodge Archive",                    HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeIPtgVfMwP0oT6iMj6dptRA5o9_9r99o43uHR5MXgbxcz-PA/viewform?usp=header'> Does this remind you of a past Dodge piece? Recommend it here.  </a>")
+),
           
         )),
     ),
@@ -288,7 +289,8 @@ nav_panel(
                 
                 
                 ),
-      nav_panel("From the Dodge Archive", HTML("<a href='https://www.thedodgemag.com/carolinehockenbury1'> 'Hammerhead' by Caroline Hockenbury is a poem that reflects on the demise of a hammerhead shark, questioning who will discover the creature now that even its bite cannot break the surf.</a>")
+      nav_panel("From the Dodge Archive",                     HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeIPtgVfMwP0oT6iMj6dptRA5o9_9r99o43uHR5MXgbxcz-PA/viewform?usp=header'> Does this remind you of a past Dodge piece? Recommend it here.  </a>")
+
       )
     )),
 ),
@@ -348,7 +350,8 @@ nav_panel(
                     p("Missingness: Write a creative nonfiction or investigative speculative essay that interrogates absence in this data. Is a missing species a missing data entry, an oversight in the system, or a deeper commentary on what types of life we value and record?"),
                     p("Being Counted: Use the absence of species to explore what it means to not be counted. Reflect on what disappears when documentation fails—and who is left unseen."),),
           nav_panel("From the Dodge Archive",
-                    p(""),
+                    HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeIPtgVfMwP0oT6iMj6dptRA5o9_9r99o43uHR5MXgbxcz-PA/viewform?usp=header'> Does this remind you of a past Dodge piece? Recommend it here.  </a>")
+                    ,
           )
         )), 
      
@@ -402,7 +405,8 @@ nav_panel(
                             p("Endangered Thoughts: Filter for endangered or threatened species. Write a meditative monologue from one such species — its fears, memories, and its hope for the earth."),
                             p("A Game of Species: Pick two parks with very different species. Write a letter exchange between two species — one from each park—exploring how their ecosystems have shaped their identities."),),
                   nav_panel("From the Dodge Archive",
-                            p(""),
+                            HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeIPtgVfMwP0oT6iMj6dptRA5o9_9r99o43uHR5MXgbxcz-PA/viewform?usp=header'> Does this remind you of a past Dodge piece? Recommend it here.  </a>")
+                            ,
                   )
                 )),
       
@@ -493,7 +497,8 @@ nav_panel(
                     p("What does home mean to you and how does it relate to your daily and weekly rhythms? What connections can be found with the deer's home and rhythms?"),
           ),
           nav_panel("From the Dodge Archive",
-                    p(""),
+                    HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeIPtgVfMwP0oT6iMj6dptRA5o9_9r99o43uHR5MXgbxcz-PA/viewform?usp=header'> Does this remind you of a past Dodge piece? Recommend it here.  </a>")
+                    ,
           )
         )),
       card(
@@ -541,7 +546,8 @@ nav_panel(
                     p("Use the day of the week as a way to blend human and animal points of view. What do the `Sunday Scaries' look like for a deer? What about a deer celebrating because... TGIF?"),
           ),
           nav_panel("From the Dodge Archive",
-                    p(""),
+                    HTML("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeIPtgVfMwP0oT6iMj6dptRA5o9_9r99o43uHR5MXgbxcz-PA/viewform?usp=header'> Does this remind you of a past Dodge piece? Recommend it here.  </a>")
+                    ,
           )
         )),
  
