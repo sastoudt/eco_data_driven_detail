@@ -464,6 +464,37 @@ nav_panel(
     nav_panel(
       "White-tailed Deer: A Deeper Dive",
       card(
+        card_header("I'm interested in learning more about the deer's home ranges."),
+        p(""),
+        ## toggles
+        radioButtons(
+          "map_type2", "Map point of view:",
+          c(
+            "Human Elements" = "human",
+            "Nature Elements" = "nature"
+          )
+        ),
+        leafletOutput("deer_home"),
+      ),
+      ##ADDING TABS TO TEXT BOX AND PROMPTS ##
+      
+      card(
+        ##ADDING TABS TO TEXT BOX AND PROMPTS ##
+        
+        navset_card_pill(
+          nav_panel("Time to Write!", 
+                    textAreaInput("text3", "", "", height = "200px", width = "1500px"),
+                    p("When you are done, feel free to download your ideas so you have them for future reference."),
+                    downloadButton("downloadText2", "Download Notes")),
+          nav_panel("Prompts to Consider", 
+                    p("Blend human and animal points of view depending on which choice of map background you choose. What things are nearby that humans might notice or wonder about? What things are nearby that deer might notice or wonder about?"),
+                    p("What does home mean to you and how does it relate to your daily and weekly rhythms? What connections can be found with the deer's home and rhythms?"),
+          ),
+          nav_panel("From the Dodge Archive",
+                    p(""),
+          )
+        )),
+      card(
         card_header("I'm interested in learning more about the deer's day-to-day travels."),
       ),
       layout_columns(
@@ -492,58 +523,28 @@ nav_panel(
         plotOutput("distPlot"),
       ),
       ##ADDING TABS TO TEXT BOX AND PROMPTS ##
-      card(
-        #card_header("Get writing!"),
-        navset_card_pill(
-          nav_panel("Space to Write",p(""),
-        textAreaInput("text3", "", "", height = "200px", width = "800px"),
-        p("When you are done, feel free to download your ideas so you have them for future reference."),
-        downloadButton("downloadText2", "Download Notes")),
-          nav_panel("Prompts",
-                    tags$ul(
-                      tags$li("Make each line of a poem proportional in length (or in number of words) to the distance traveled in each time step of one deer."),
-                      tags$li("Write a two character braid story where the characters come together when the deer get within a certain range of one another. To do this, make the story length before meeting points proportional (in sentences or physically on the page) to the time waiting for the cross."),
-                      tags$li("Use the cumulative distances travelled as a constraint for the energy or tone of the piece. In your story, the main character grows wearier and wearing in proportion to the distance travelled. If this brings your story’s energy down too much, consider what other elements in the data might represent a “boost” in energy, for example, when the character meets another character, or when they cross close to a particular spot on the map."),
-                      tags$li("Use the day of the week as a way to blend human and animal points of view. What do the “Sunday Scaries” look like for a deer? What about a deer celebrating because… TGIF?")
-                    )
-                    
-                    
-                    )
-      )),
-      card(
-        card_header("I'm interested in learning more about the deer's home ranges."),
-        p(""),
-        ## toggles
-        radioButtons(
-          "map_type2", "Map point of view:",
-          c(
-            "Human Elements" = "human",
-            "Nature Elements" = "nature"
-          )
-        ),
-        leafletOutput("deer_home"),
-      ),
-      ##ADDING TABS TO TEXT BOX AND PROMPTS ##
-      card(
-        #card_header("Get writing!"),
-        navset_card_pill(
-          nav_panel("Space to Write",p(""),
-                    textAreaInput("text3", "", "", height = "200px", width = "800px"),
-                    p("When you are done, feel free to download your ideas so you have them for future reference."),
-                    downloadButton("downloadText2", "Download Notes")),
-          nav_panel("Prompts",
-                    tags$li("Blend human and animal points of view depending on which choice of map background you choose. What things are nearby that humans might notice or wonder about? What things are nearby that deer might notice or wonder about?"),
-                    tags$li("What does home mean to you and how does it relate to your daily and weekly rhythms? What connections can be found with the deer's home and rhythms?")
-                    
-                    
-                    )
-        )),
       
       card(
-        card_header("Coming soon..."),
-        p("I'm interested in learning more about the interactions between the two deer."),
-        p("I'm interested in learning more about the deers' environment.")
-      )
+        ##ADDING TABS TO TEXT BOX AND PROMPTS ##
+        
+        navset_card_pill(
+          nav_panel("Time to Write!", 
+                    textAreaInput("text3", "", "", height = "200px", width = "1500px"),
+                    p("When you are done, feel free to download your ideas so you have them for future reference."),
+                    downloadButton("downloadText3", "Download Notes")),
+          nav_panel("Prompts to Consider", 
+                    p("Make each line of a poem proportional in length (or in number of words) to the distance traveled in each time step of one deer."),
+                    p("Write a two character braid story where the characters come together when the deer get within a certain range of one another. To do this, make the story length before meeting points proportional (in sentences or physically on the page) to the time waiting for the cross."),
+                    p("Use the cumulative distances travelled as a constraint for the energy or tone of the piece. In your story, the main character grows wearier and wearing in proportion to the distance travelled. If this brings your story’s energy down too much, consider what other elements in the data might represent a “boost” in energy, for example, when the character meets another character, or when they cross close to a particular spot on the map."),
+                    p("Use the day of the week as a way to blend human and animal points of view. What do the `Sunday Scaries' look like for a deer? What about a deer celebrating because... TGIF?"),
+          ),
+          nav_panel("From the Dodge Archive",
+                    p(""),
+          )
+        )),
+ 
+      
+      
     )
   )
 )
