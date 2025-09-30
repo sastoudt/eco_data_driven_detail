@@ -272,12 +272,18 @@ nav_panel(
                 textAreaInput("text4", "", "", height = "200px", width = "1500px"),
                 p("When you are done, feel free to download your ideas so you have them for future reference."),
                 downloadButton("downloadText4", "Download Notes")),
-      nav_panel("Prompts to Consider", p("What do you notice about locations that have many observations? Are these hotspots consistent across decades?"),
-                p("Find a location that has sightings across multiple decades. What if those reoccurring sightings across time were the same shark or group of sharks that visited the same location in multiple decades? Write from the point of view of these sharks from a variety of time points. What changes, and what stays the same? Is there something special about that place?"),
-                p("Find an isolated shark sighting that is not nearby any others. Write from the point of view of the shark that was spotted. Why would they want to travel alone in a new location? How did they get there, and where are they coming from?"),
-                p("Approximate the location of a particular data point and write a legend that explains why this spot has attracted great whites across decades. What would the legend be from the perspective of the shark? The perspective of the nearby humans?"),
+      nav_panel("Prompts to Consider",  
+                p("Write from the point of view of an iNaturalist user who is getting more and more into using the iNaturalist app over time."),
+                p("Write from the point of view of a species in growth (or decline). (In other words, which years have more/less species spotted and speculate from there.)"),
+                p("Consider a piece you are writing that unfurls over time. Pick a state that has an environment similar to the setting of your piece and a year that is as close as possible to the time frame of your piece. How might the change in species richness for that place/year over the four seasons impact the narrative?"),
+                p("Write from the point of view of a species across the four seasons in a given year. What does the change in the seasons look like in their eyes?"),
+                p("Write from the point of view of an iNaturalist user across the four seasons in a given year. How have they changed as their environment changes?"),
+                p("Write from the point of view of a species that disappears in a particular season and re-emerges in a different season. (In other words, which seasons have more/less species spotted and speculate from there.)"),
+                p("Write from the point of view of an iNaturalist user who faces the transition between seasons and the differences in the species available to them that comes with it."),
                 
-                p("Why are the majority of the spottings on the coast? Why not the middle of the ocean? Is there something the sharks are afraid of? How do they feel about the people on the beach? Consider how the data is collected.")),
+                
+                
+                ),
       nav_panel("From the Dodge Archive", HTML("<a href='https://www.thedodgemag.com/carolinehockenbury1'> 'Hammerhead' by Caroline Hockenbury is a poem that reflects on the demise of a hammerhead shark, questioning who will discover the creature now that even its bite cannot break the surf.</a>")
       )
     )),
