@@ -372,23 +372,37 @@ nav_panel(
                 checkboxInput("endangeredOnly", "Show only endangered/threatened/species of concern", value = FALSE),
                 plotOutput("vennPlot"),
                 verbatimTextOutput("vennSummary"),
-                tags$ul(
-                  tags$li("Pick Your Park: Select a park and scan the animals observed. What’s the first thing that stands out — a species you didn’t expect, a pattern in the numbers, or perhaps the lack of sightings? Use this observation as your entry point."),
-                  tags$li("Follow the Trail: Choose one animal and track its presence across multiple parks. Does the data reveal a migration route, or do the numbers stay consistent across locations? What could explain the patterns?"),
-                  tags$li("Moments of Conflict: Select a park where multiple species are observed. Imagine a moment of tension: predator and prey crossing paths, two animals competing for territory, or humans unknowingly disturbing a delicate balance."),
-                  tags$li("Movement Mission: Pick two species and write about them working together to travel from one side of the park they both live in to the other. What types of terrain would the group struggle with? How could they work together to overcome these?"),
-                  tags$li("Echoes in the Peaks: Look at a subset of the species list for a national park with high species diversity (e.g. Great Smoky Mountains). Write a multi-perspective narrative weaving together voices of species from different taxa—plant, bird, insect—coping with a sudden environmental shift."),
-                  tags$li("Endangered Prayers: Filter for endangered or threatened species. Write a meditative monologue from one such species — its fears, memories, and its prayer to the earth."),
-                  tags$li("A Game of Species: Pick two parks with very different species. Write a letter exchange between two species — one from each park—exploring how their ecosystems have shaped their identities.")
-     
-                ),
-                actionButton("toggleShared", "Show/Hide Shared Species"),
+                
+                #actionButton("toggleShared", "Show/Hide Shared Species"),
+                h2("Shared Species"),
                 hidden(div(id = "sharedDiv", DT::dataTableOutput("sharedSpecies"))),
-                actionButton("toggleP1", "Show/Hide Park 1 Unique Species"),
+                #actionButton("toggleP1", "Show/Hide Park 1 Unique Species"),
+                h2("Park 1 Unique Species"),
                 hidden(div(id = "p1Div", DT::dataTableOutput("park1Species"))),
-                actionButton("toggleP2", "Show/Hide Park 2 Unique Species"),
+                #actionButton("toggleP2", "Show/Hide Park 2 Unique Species"),
+                h2("Park 2 Unique Species"),
                 hidden(div(id = "p2Div", DT::dataTableOutput("park2Species")))
-              )   
+              ), 
+              card(
+                ##ADDING TABS TO TEXT BOX AND PROMPTS ##
+                
+                navset_card_pill(
+                  nav_panel("Time to Write!", 
+                            textAreaInput("textNP2", "", "", height = "200px", width = "1500px"),
+                            p("When you are done, feel free to download your ideas so you have them for future reference."),
+                            downloadButton("downloadTextNP2", "Download Notes")),
+                  nav_panel("Prompts to Consider", 
+                            p("Pick Your Park: Select a park and scan the animals observed. What’s the first thing that stands out — a species you didn’t expect, a pattern in the numbers, or perhaps the lack of sightings? Use this observation as your entry point."),
+                            p("Follow the Trail: Choose one animal and track its presence across multiple parks. Does the data reveal a migration route? What else could explain the patterns?"),
+                            p("Moments of Conflict: Select a park where multiple species are observed. Imagine a moment of tension: predator and prey crossing paths, two animals competing for territory, or humans unknowingly disturbing a delicate balance."),
+                            p("Movement Mission: Pick two species and write about them working together to travel from one side of the park they both live in to the other. What types of terrain would the group struggle with? How could they work together to overcome these?"),
+                            p("Echoes in the Peaks: Look at a subset of the species list for a national park with high species diversity (e.g. Great Smoky Mountains). Write a multi-perspective narrative weaving together voices of species from different taxa—plant, bird, insect—coping with a sudden environmental shift."),
+                            p("Endangered Thoughts: Filter for endangered or threatened species. Write a meditative monologue from one such species — its fears, memories, and its hope for the earth."),
+                            p("A Game of Species: Pick two parks with very different species. Write a letter exchange between two species — one from each park—exploring how their ecosystems have shaped their identities."),),
+                  nav_panel("From the Dodge Archive",
+                            p(""),
+                  )
+                )),
       
       
       

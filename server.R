@@ -87,6 +87,15 @@ function(input, output, session) {
     }
   )
   
+    output$downloadTextNP2 <- downloadHandler(
+    filename = function() {
+      paste("draft-nationalPark-", gsub(" ", "_", Sys.time()), ".txt", sep = "")
+    },
+    content = function(con) {
+      writeLines(input$textNP2, con)
+    }
+  )
+  
 #### roadless ####
   
   output$map1 <- renderLeaflet({getLocation(1)})
